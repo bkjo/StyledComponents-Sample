@@ -2,20 +2,20 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
-    width: 120px;
-    min-width: 120px;
   display: flex;
+  flex: 1;
   flex-direction: column;
+  background: skyblue;
 `
 
-class MenuList extends Component {
+class Page1 extends Component {
     render() {
         return (
             <Container>
-                menuList
+                Page1
             </Container>
         );
     }
 }
 
-export default MenuList;
+export default Page1;

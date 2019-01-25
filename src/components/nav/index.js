@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 
+import { actionCreators } from '../../reducer';
 import Logo from '../logo';
+import ButtonRender from './buttonRender';
 
 const Container = styled.div`
     witdht: 100%;
@@ -10,17 +13,9 @@ const Container = styled.div`
     flex-direction: row;
     align-items: center;
     padding: 5px;
-    background: yellow;
+    background-color: yellow;
 `;
-const Button = styled.button`
-    border-radius: 50px;
-    padding 5px;
-    min-width: 120px;
-    cursor: pointer;
-    font-weight: 600;
-    background: #474a98;
-    color: #fff;
-`;
+
 const NavButton = styled.div`
     width: 100%;
     display: flex;
@@ -28,19 +23,39 @@ const NavButton = styled.div`
     justify-content: space-evenly;
 `;
 
+const ButtonFilter = ["PAGE1","PAGE2","PAGE3"];
+
 class Nav extends Component {
+    
+    _handleButton = (e) =>{
+        const {selectButton} = this.props;
+        selectButton(e.target.title);
+    }
+    
     render() {
         return (
             <Container>
                 <Logo />
                 <NavButton>
-                    <Button>button1</Button>
-                    <Button>button2</Button>
-                    <Button>button3</Button>
+                    <ButtonRender handleButton={this._handleButton} ButtonFilter={ButtonFilter}/>
                 </NavButton>
             </Container>
         );
     }
 }
 
-export default Nav;
+const mapStateToProps = state => {
+    const { item } = state;
+    return {
+        item
+    };
+};
+
+
+const mapDispatcherToProps = dispatch => {
+    return {
+        selectButton: (item) => dispatch(actionCreators.selectButton(item))
+    }
+};
+
+export default connect(mapStateToProps,mapDispatcherToProps)(Nav);

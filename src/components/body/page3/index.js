@@ -8,14 +8,14 @@ const Container = styled.div`
   background: gray;
 `
 
-class MenuList extends Component {
+class Page3 extends Component {
     render() {
         return (
             <Container>
-                content
+                Page3
             </Container>
         );
     }
 }
 
-export default MenuList;
+export default Page3;
